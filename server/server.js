@@ -19,8 +19,6 @@ app.use(express.json());
 app.use('/api/groups', groupRoutes);
 
 mongoose.connect(process.env.MONGODB_URI,{
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000, // Increase connection timeout to 30 seconds
 })
   .then(() => console.log('MongoDB Connected'))
