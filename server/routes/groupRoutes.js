@@ -58,20 +58,34 @@ router.get('/available-topics', async (req, res) => {
     "Topic 9 : Cryptography as a Security Tool, Secure Communication over Insecure Medium, User Authentication, Passwords", 
     "Topic 10 : Implementing Security Defenses, Firewalling to Protect Systems and Networks, Network Security Through Domain Separation Via Firewall"
   ];
-  
 
   try {
-    // Get the count of groups per topic
-    const topicsCount = await Group.aggregate([
-      { $group: { _id: "$topic", count: { $sum: 1 } } },
-    ]);
+    // Fetch all groups from the database
+    const allGroups = await Group.find({});
+
+    // Count the number of groups per topic using reduce
+    const topicsCount = allGroups.reduce((acc, group) => {
+      // Increment the count for the topic if it already exists in the accumulator
+      if (acc[group.topic]) {
+        acc[group.topic]++;
+      } else {
+        // Initialize the count to 1 if the topic doesn't exist in the accumulator
+        acc[group.topic] = 1;
+      }
+      return acc;
+    }, {});
 
     // Map available topics with the number of slots remaining
     const availableTopics = availableTopicList.map((topic) => {
-      const topicData = topicsCount.find((item) => item._id === topic);
+      // Get the count of groups for the topic or default to 0 if not found
+      const count = topicsCount[topic] || 0;
+
+      // Calculate the available slots (assuming 3 is the max number of groups per topic)
+      const availableSlots = 3 - count;
+
       return {
         topic,
-        availableSlots: topicData ? 3 - topicData.count : 3, // Default to 3 if no groups are assigned to the topic
+        availableSlots: availableSlots > 0 ? availableSlots : 0, // Ensure no negative available slots
       };
     });
 
