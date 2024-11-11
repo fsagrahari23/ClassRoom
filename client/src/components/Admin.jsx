@@ -33,16 +33,16 @@ const AdminPage = () => {
   };
 
   const availableTopics = [
-    "Topic 1",
-    "Topic 2",
-    "Topic 3",
-    "Topic 4",
-    "Topic 5",
-    "Topic 6",
-    "Topic 7",
-    "Topic 8",
-    "Topic 9",
-    "Topic 10",
+    "Topic 1 : I/O Hardware, Port, Bus, Controller, Bus Architecture",
+    "Topic 2 : Polling, Interrupts, I/O Requests to Hardware Operations, Interrupt Driven I/O Cycle, Life Cycle of IO request",
+    "Topic 3 : Direct Memory Access, Applications of IO interface",
+    "Topic 4 : Kernel I/O Structure, Characteristics of I/O Devices",
+    "Topic 5 : Kernel I/O Subsystem, Error Handling, I/O Protection",
+    "Topic 6 : Use of a System Call to Perform I/O, Kernel Data Structures, UNIX I/O Kernel Structure",
+    "Topic 7 : The Security Problem, Security Violation Categories, Security Violation Methods",
+    "Topic 8 : Security Measure Levels, Program Threats, System and Network Threats (Cont.)",
+    "Topic 9 : Cryptography as a Security Tool, Secure Communication over Insecure Medium, User Authentication, Passwords",
+    "Topic 10 : Implementing Security Defenses, Firewalling to Protect Systems and Networks, Network Security Through Domain Separation Via Firewall",
   ];
 
   if (loading) return <div>Loading...</div>;
